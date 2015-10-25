@@ -615,7 +615,8 @@ def shallow_water(ql=np.array([3.0, 5.0]), qr=np.array([3.0, -5.0]), g=1.0, time
                   hmax=None, humin=None, humax=None):
     # Create figure
     # Create a figure
-    fig, axfull = plt.subplots(2,2, figsize=(13, 12))
+    #fig, axfull = plt.subplots(2,2, figsize=(13, 12))
+    fig, axfull = plt.subplots(2,2, figsize=(10, 8))
     fig.subplots_adjust(left=0.05, right=0.9, bottom=0.1, top=0.9,
                         hspace=0.3, wspace=0.15)
 
@@ -669,14 +670,14 @@ def shallow_water(ql=np.array([3.0, 5.0]), qr=np.array([3.0, -5.0]), g=1.0, time
     intcr2 = ax[0].plot(xxR2,yyR2, '--b', linewidth=1.5)
 
     # Plot ql and qr
-    points = ax[0].plot([ql[0],qr[0]], [ql[1], qr[1]], 'ok', alpha=0.7, markersize=15, markeredgewidth=1)
+    points = ax[0].plot([ql[0],qr[0]], [ql[1], qr[1]], 'ok', alpha=0.7, markersize=10, markeredgewidth=1)
     #data = ["q_l", "q_r"] 
 
     # Plot markers
     offsetx = 0.3*hmax/10
     offsety = -3*offsetx
     qlmarker = ax[0].plot(ql[0]+offsetx, ql[1]+offsety, 'ok', marker=(r"$ q_l $"), markersize=15)
-    qmmarker = ax[0].plot(qm[0]+offsetx, qm[1]+offsety, 'ok', marker=(r"$ q_m $"), markersize=20)
+    qmmarker = ax[0].plot(qm[0]+offsetx, qm[1]+offsety, 'ok', marker=(r"$ q_m $"), markersize=15)
     qrmarker = ax[0].plot(qr[0]+offsetx, qr[1]+offsety, 'ok', marker=(r"$ q_r $"), markersize=15)
 
     # Set axis 1 properties
