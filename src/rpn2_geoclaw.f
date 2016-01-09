@@ -151,7 +151,8 @@ c        !set normal direction
          wall(2) = 1.d0
          wall(3) = 1.d0
          if (hR.le.drytol) then
-            call riemanntype(hL,hL,uL,-uL,hstar,s1m,s2m,
+            ! MODIFIED:
+            call riemanntype(hL,hL,uL,uR,hstar,s1m,s2m,
      &                                  rare1,rare2,1,drytol,g)
             hstartest=max(hL,hstar)
             if (hstartest+bL.lt.bR) then !right state should become ghost values that mirror left for wall problem
@@ -168,7 +169,8 @@ c                bR=hstartest+bL
                bR=hL+bL
             endif
          elseif (hL.le.drytol) then ! right surface is lower than left topo
-            call riemanntype(hR,hR,-uR,uR,hstar,s1m,s2m,
+            ! MODIFIED:
+            call riemanntype(hR,hR,uL,uR,hstar,s1m,s2m,
      &                                  rare1,rare2,1,drytol,g)
             hstartest=max(hR,hstar)
             if (hstartest+bR.lt.bL) then  !left state should become ghost values that mirror right
