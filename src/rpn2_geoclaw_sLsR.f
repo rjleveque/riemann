@@ -71,6 +71,7 @@ c
       double precision deldelh,deldelphi
       double precision beta1,beta2,beta3,del1,del2,del3
       double precision roe_depth
+      double precision hu_star, u_star
 
 
       !loop through Riemann problems at each grid cell
@@ -279,22 +280,31 @@ c        !eliminate ghost fluxes for wall
           !sR = uhat + chat
 
           beta1 = (sR*del1 - del2) / (sR - sL)
-          beta2 = -vhat*del1 + del3
           beta3 = (-sL*del1 + del2) / (sR - sL)
+          hu_star = huL + beta1  ! intermediate hu 
+          if (hu_star < 0.d0) then
+              ! 2-wave moving to left, so compute u in left cell
+              u_star = hu_star / hL
+            else
+              ! 2-wave moving to right, so compute u in right cell
+              u_star = hu_star / hR
+            endif
+          !beta2 = -vhat*del1 + del3
+          beta2 = del3 - beta1*vL - beta3*vR
     
           fwave(1,1,i) = beta1
           fwave(mu,1,i) = beta1 * sL
-          fwave(nv,1,i) = beta1 * vhat
+          fwave(nv,1,i) = beta1 * vL
           s(1,i) = sL
     
           fwave(1,2,i) = 0.d0
           fwave(mu,2,i) = 0.d0
           fwave(nv,2,i) = beta2
-          s(2,i) = uhat
+          s(2,i) = u_star
     
           fwave(1,3,i) = beta3
           fwave(mu,3,i) = beta3 * sR
-          fwave(nv,3,i) = beta3 * vhat
+          fwave(nv,3,i) = beta3 * vR
           s(3,i) = sR
 
 c         write(57,571) sL,uhat,sR,beta1,beta2,beta3
