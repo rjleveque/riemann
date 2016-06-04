@@ -14,7 +14,7 @@ from vc_advection_1D_py import vc_advection_1D
 from acoustics_1D_py import acoustics_1D
 from burgers_1D_py import burgers_1D
 from shallow_1D_py import shallow_roe_1D, shallow_hll_1D, shallow_exact_1D
-from euler_1D_py import euler_roe_1D, euler_hll_1D, euler_exact_1D
+from euler_1D_py import euler_roe_1D, euler_hll_1D, euler_hllc_1D, euler_exact_1D
 from nonlinear_elasticity_1D_py import nonlinear_elasticity_1D
 import static
 
@@ -91,3 +91,4 @@ except ImportError as e:
 import os
 if os.path.exists('./layered_shallow_water_1D.so'):
     import layered_shallow_water_1D
+    import layered_shallow_water_1D_constants
