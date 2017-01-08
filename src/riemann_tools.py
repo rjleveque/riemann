@@ -254,7 +254,7 @@ def JSAnimate_plot_riemann(states,speeds,riemann_eval, times=None, **kwargs):
         plt.close(fig)
         
     images = animation_tools.make_images(figs)
-    anim = animation_tools.JSAnimate_images(images, figsize=(8,4))
+    anim = animation_tools.JSAnimate_images(images, figsize=(10,5))
     return anim
 
  
@@ -280,13 +280,13 @@ def plot_riemann_trajectories(states, s, riemann_eval, i_vel=1, fig=None, color=
     for i in range(len(s)):
         if type(s[i]) not in (tuple, list):  # this is a jump
             x1 = tmax * s[i]
-            ax.plot([0,x1],[0,tmax],color=color)
+            ax.plot([0,x1],[0,tmax],color=color, lw=2)
             xmax = max(xmax,abs(x1))
         else: #plot rarefaction fan
             speeds = np.linspace(s[i][0],s[i][1],5)
             for ss in speeds:
                 x1 = tmax * ss
-                ax.plot([0,x1],[0,tmax],color=color,lw=0.3)
+                ax.plot([0,x1],[0,tmax],color=color,lw=1)
                 xmax = max(xmax,abs(x1))
 
     x = np.linspace(-xmax,xmax,1000)
