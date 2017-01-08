@@ -258,7 +258,8 @@ def JSAnimate_plot_riemann(states,speeds,riemann_eval, times=None, **kwargs):
     return anim
 
  
-def plot_riemann_trajectories(states, s, riemann_eval, i_vel=1, fig=None, color='b'):
+def plot_riemann_trajectories(states, s, riemann_eval, i_vel=1, 
+            fig=None, color='b', num_left=10, num_right=10):
     """
     Take an array of states and speeds s and plot the solution in the x-t plane,
     along with particle trajectories.
@@ -293,8 +294,11 @@ def plot_riemann_trajectories(states, s, riemann_eval, i_vel=1, fig=None, color=
                    
     ax.set_xlim(-xmax,xmax)
 
-    xx = np.linspace(-1.9,1.9,22)
+    xx_left = np.linspace(-xmax,0,num_left)
+    xx_right = np.linspace(0,xmax,num_right)
+    xx = np.hstack((xx_left, xx_right))
     xtraj = [xx]
+
     nsteps = 200.
     dt = 1./nsteps
     tt = np.linspace(0,1,nsteps+1)
